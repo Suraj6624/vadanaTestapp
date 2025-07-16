@@ -33,44 +33,33 @@ class _StudentDashboardState extends State<StudentDashboard> {
     String amount,
   ) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.45,
-
       child: Card(
         color: Colors.white,
 
         elevation: 3,
 
         child: Container(
+          width: 120,
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
             color: Colors.white,
-            border: Border(left: BorderSide(width: 5.0, color: PRIME_ORANGE)),
+            border: Border.all(width: 2.0, color: Colors.orange),
           ),
 
           child: Column(
             children: [
-              Row(
-                children: [
-                  Icon(icon, color: PRIME_BLUE),
-                  const SizedBox(width: 8),
+              Icon(icon, color: PRIME_BLUE),
 
-                  Expanded(
-                    child: Text(
-                      label,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: PRIME_BLACK,
-                      ),
-                      softWrap: true,
-
-                      overflow: TextOverflow.visible,
-                    ),
-                  ),
-                ],
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: PRIME_BLACK,
+                ),
               ),
-              SizedBox(height: 8),
+
               Text(
                 amount,
                 style: TextStyle(
@@ -88,61 +77,193 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
-        width: MediaQuery.of(context).size.width * 0.75,
-        backgroundColor: Colors.white,
-        child: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.all(10),
-            children: [
-              SizedBox(height: 16),
-              _buildDrawerItem('Home', Icons.home),
+    return SafeArea(
+      child: Scaffold(
+        drawer: Drawer(
+          width: MediaQuery.of(context).size.width * 0.8,
+          backgroundColor: Colors.white,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.blue,
+                  height: 200,
 
-              _buildDrawerItem('Courses', Icons.menu_book),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(
+                              color: const Color.fromARGB(255, 122, 178, 223),
+                              width: 10,
+                            ),
+                            top: BorderSide(
+                              color: const Color.fromARGB(255, 122, 178, 223),
+                              width: 10,
+                            ),
+                            right: BorderSide(
+                              color: const Color.fromARGB(255, 122, 178, 223),
+                              width: 10,
+                            ),
+                            left: BorderSide.none,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(
+                              140,
+                            ), // makes top-right corner rounded
+                            bottomRight: Radius.circular(
+                              140,
+                            ), // makes bottom-right corner rounded
+                          ),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          height: 100,
 
-              _buildDrawerItem('Payment', Icons.payment),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(
+                                100,
+                              ), // makes top-right corner rounded
+                              bottomRight: Radius.circular(
+                                100,
+                              ), // makes bottom-right corner rounded
+                            ),
+                          ),
+                          child: Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.orange,
+                                width: 3,
+                              ),
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                  'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
+                                ),
+                                // fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
 
-              _buildDrawerItem('Study Material', Icons.import_contacts),
+                      Container(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hello',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              'Nikita Singh Rathor',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'VC24F29B5',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                    ),
+                    child: ListView(
+                      children: [
+                        SizedBox(height: 16),
+                        _buildDrawerItem('Home', Icons.home),
 
-              _buildDrawerItem('Test', Icons.text_snippet),
-              _buildDrawerItem('Notice', Icons.notifications),
+                        _buildDrawerItem('Courses', Icons.menu_book),
 
-              _buildDrawerItem('Contact', Icons.phone),
+                        _buildDrawerItem('Payment', Icons.payment),
 
-              _buildDrawerItem(
-                'Logout',
-                Icons.logout,
-                onTap: () {
-                  Navigator.pop(context); // Close drawer
-                  Navigator.pop(context); // Navigate back to login
+                        _buildDrawerItem(
+                          'Study Material',
+                          Icons.import_contacts,
+                        ),
+
+                        _buildDrawerItem('Test', Icons.text_snippet),
+                        _buildDrawerItem('Notice', Icons.notifications),
+
+                        _buildDrawerItem('Contact', Icons.phone),
+                      ],
+                    ),
+                  ),
+                ),
+                _buildDrawerItem(
+                  'Logout',
+                  Icons.logout,
+                  onTap: () {
+                    Navigator.pop(context); // Close drawer
+                    Navigator.pop(context); // Navigate back to login
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 2,
+          centerTitle: true,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Builder(
+              builder: (context) => IconButton(
+                icon: const Icon(Icons.menu, color: Colors.black),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer(); // Opens the side drawer
                 },
               ),
-            ],
+            ),
           ),
-        ),
-      ),
 
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 2,
-        centerTitle: true,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu, color: Colors.black),
-            onPressed: () {
-              Scaffold.of(context).openDrawer(); // Opens the side drawer
-            },
+          title: Image.network(
+            "https://vfpatna.com/assets/vf_logo.png", // Center logo
+            height: 40,
           ),
+
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.notifications,
+                  color: const Color.fromARGB(255, 184, 169, 32),
+                ),
+
+                onPressed: () {
+                  print("notification clicked");
+                },
+              ),
+            ),
+          ],
         ),
-        title: Image.network(
-          "https://vfpatna.com/assets/vf_logo.png", // Center logo
-          height: 40,
-        ),
-      ),
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsetsGeometry.all(16),
             child: Column(
@@ -159,12 +280,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Image section
                         Container(
-                          height: 100,
-                          width: 75,
+                          height: 80,
+                          width: 80,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.orange, width: 2),
                             image: const DecorationImage(
                               image: NetworkImage(
                                 'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
@@ -174,6 +295,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           ),
                         ),
 
+                        // Image section
                         const SizedBox(width: 24), // Spacing
                         // Text section with icons
                         Column(
@@ -241,47 +363,62 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
-
+                SizedBox(height: 12),
                 Container(
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildPaymentRow(
-                        context,
-                        Icons.school,
-                        "Course Fee",
-                        "₹ 6500",
-                      ),
-
-                      _buildPaymentRow(
-                        context,
-                        Icons.payments,
-                        "Total Paid",
-                        "₹ 6500",
-                      ),
-                    ],
+                  decoration: BoxDecoration(
+                    color: PRIME_BLUE,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(32),
+                      bottomRight: Radius.circular(32),
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  padding: EdgeInsets.only(top: 16, bottom: 16),
+                  child: Column(
                     children: [
-                      _buildPaymentRow(
-                        context,
-                        Icons.account_balance_wallet,
-                        "Due Amount",
-                        "₹ 0",
+                      Container(
+                        width: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildPaymentRow(
+                              context,
+                              Icons.school,
+                              "Course Fee",
+                              "₹ 6500",
+                            ),
+
+                            _buildPaymentRow(
+                              context,
+                              Icons.payments,
+                              "Total Paid",
+                              "₹ 6500",
+                            ),
+                          ],
+                        ),
                       ),
 
-                      _buildPaymentRow(
-                        context,
-                        Icons.add_card,
-                        "Add Payment",
-                        "₹ 0",
+                      SizedBox(height: 16),
+                      Container(
+                        width: double.infinity,
+
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildPaymentRow(
+                              context,
+                              Icons.account_balance_wallet,
+                              "Due Amount",
+                              "₹ 0",
+                            ),
+
+                            _buildPaymentRow(
+                              context,
+                              Icons.add_card,
+                              "Add Payment",
+                              "₹ 0",
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -290,195 +427,85 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 SizedBox(height: 12),
                 Container(
                   width: double.infinity,
-
-                  padding: EdgeInsets.only(right: 4, left: 4),
-                  child: Row(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 2, color: Colors.orange),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Payment History",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: PRIME_BLACK,
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: PRIME_BLUE,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {},
                         child: Text(
-                          "View All",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: PRIME_BLACK,
-                          ),
+                          'Recent Payment',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Course Fee ₹6500/- :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text('Fully Paid'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Date Of Payment :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text('20-10-2025'),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 12),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        color: Colors.white,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BuiltRow(
-                                icon: Icons.receipt_long,
-                                label: "Transaction",
-                                value: "TRN/22852",
-                                iconColor: Colors.deepOrange,
-                              ),
 
-                              // Transaction ID
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.payment,
-                                label: "Payment Mode",
-                                value: "Full Payment",
-                                iconColor: Colors.teal,
-                              ),
-
-                              // Payment Mode
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.currency_rupee,
-                                label: "Amount",
-                                value: "₹ 6500",
-                                iconColor: Colors.green,
-                              ),
-
-                              // Amount
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.calendar_today,
-                                label: "Date",
-                                value: "24 Dec 2024",
-                                iconColor: Colors.blueGrey,
-                              ),
-
-                              // Date
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 16),
                 Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Card(
-                        color: Colors.white,
+                        color: PRIME_BLUE,
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              BuiltRow(
-                                icon: Icons.receipt_long,
-                                label: "Transaction ID",
-                                value: "TRN/22852",
-                                iconColor: Colors.deepOrange,
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12),
+                                  ),
+                                ),
+                                child: Text('Recent Test'),
                               ),
-
-                              // Transaction ID
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.payment,
-                                label: "Payment Mode",
-                                value: "Full Payment",
-                                iconColor: Colors.teal,
-                              ),
-
-                              // Payment Mode
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.currency_rupee,
-                                label: "Amount",
-                                value: "₹ 6500",
-                                iconColor: Colors.green,
-                              ),
-
-                              // Amount
-                              SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.calendar_today,
-                                label: "Date",
-                                value: "24 Dec 2024",
-                                iconColor: Colors.blueGrey,
-                              ),
-
-                              // Date
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  width: double.infinity,
-
-                  padding: EdgeInsets.only(right: 4, left: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "My Test",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: PRIME_BLACK,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "View All",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: PRIME_BLACK,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        color: Colors.white,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
                               BuiltRow(
                                 icon: Icons.text_snippet,
                                 label: "Test Name",
@@ -494,93 +521,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                 value: "AMIT DCA 9 AM",
                                 iconColor: Colors.blueGrey,
                               ),
-
-                              // Batch
                               const SizedBox(height: 12),
-
-                              BuiltRow(
-                                icon: Icons.calendar_month,
-                                label: "Date & Time",
-                                value: "08/02/2025 09:00 AM",
-                                iconColor: Colors.orange,
-                              ),
-
-                              // Date & Time
-                              const SizedBox(height: 12),
-
                               BuiltRow(
                                 icon: Icons.check_circle,
                                 label: "Status",
                                 value: "Submitted",
                                 iconColor: Colors.green,
                               ),
-
-                              // Status
-                              const SizedBox(height: 12),
-
-                              // Action Button
-                              Builtrowandelevation(
-                                icon: Icons.visibility,
-                                label: "Action",
-                                iconColor: Colors.blueGrey,
-
-                                trailing: ElevatedButton(
-                                  onPressed: () {
-                                    // Handle view result action
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: PRIME_BLUE,
-                                    foregroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 4,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  child: const Text("View Result"),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        color: Colors.white,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BuiltRow(
-                                icon: Icons.text_snippet,
-                                label: "Test Name",
-                                value: "NOTEPAD",
-                                iconColor: Colors.deepPurple,
-                              ),
-
-                              // Test Name
-                              const SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.group,
-                                label: "Batch",
-                                value: "AMIT DCA 9 AM",
-                                iconColor: Colors.blueGrey,
-                              ),
-
                               // Batch
                               const SizedBox(height: 12),
                               BuiltRow(
@@ -591,38 +538,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                               ),
 
                               // Date & Time
-                              const SizedBox(height: 12),
-                              BuiltRow(
-                                icon: Icons.check_circle,
-                                label: "Status",
-                                value: "Submitted",
-                                iconColor: Colors.green,
-                              ),
 
                               // Status
-                              const SizedBox(height: 12),
-                              Builtrowandelevation(
-                                icon: Icons.visibility,
-                                label: "Action",
-                                trailing: ElevatedButton(
-                                  onPressed: () {
-                                    // Handle view result action
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: PRIME_BLUE,
-                                    foregroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 4,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  child: const Text("View Result"),
-                                ),
-                                iconColor: Colors.blueGrey,
-                              ),
 
                               // Action Button
                             ],

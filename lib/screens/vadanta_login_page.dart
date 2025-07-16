@@ -195,26 +195,6 @@ class _StudentLoginState extends State<StudentLogin> {
                             },
                           ),
                         ),
-                        SizedBox(height: 16),
-                        Center(
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: 'Already have an account.',
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.6),
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: 'Sign In ?',
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 24, 95, 171),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
 
                         SizedBox(height: 16),
                       ],

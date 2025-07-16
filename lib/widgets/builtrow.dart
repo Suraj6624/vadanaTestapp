@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:testapp/utils/constant.dart';
 
 class BuiltRow extends StatelessWidget {
-  final IconData icon;
   final String label;
   final String value;
-  final Color iconColor;
+
   final Color labelColor;
   final Color valueColor;
+  final IconData? icon; // ✅ Add icon
+  final Color? iconColor;
 
   const BuiltRow({
     super.key,
-    required this.icon,
+    this.icon,
+    this.iconColor,
     required this.label,
     required this.value,
-    required this.iconColor,
-    this.labelColor = PRIME_BLACK,
-    this.valueColor = Colors.black,
+
+    this.labelColor = Colors.white,
+    this.valueColor = Colors.white,
   });
 
   @override
@@ -26,7 +28,11 @@ class BuiltRow extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: iconColor),
+            Icon(
+              icon,
+              color: iconColor, // Fallback to grey if null
+              size: 20,
+            ),
             const SizedBox(width: 6),
             Text(label, style: TextStyle(fontSize: 14, color: labelColor)),
           ],
