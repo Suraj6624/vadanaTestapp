@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/widgets/appbar.dart';
-import 'package:testapp/widgets/searchbar.dart';
-import 'package:testapp/widgets/course_builtrow.dart';
-import 'package:testapp/screens/studyMaterial.dart';
 import 'package:testapp/screens/student_dashboard.dart';
+import 'package:testapp/screens/studyMaterial.dart';
 import 'package:testapp/screens/payment.dart';
 import 'package:testapp/screens/notice.dart';
+import 'package:testapp/widgets/course_builtrow.dart';
 
-class Course extends StatefulWidget {
-  const Course({super.key});
+class Result extends StatefulWidget {
+  const Result({super.key});
 
   @override
-  State<Course> createState() => _CourseState();
+  State<Result> createState() => _ResultState();
 }
 
-class _CourseState extends State<Course> {
+class _ResultState extends State<Result> {
   void _navigateToPage(BuildContext context, int index) {
     switch (index) {
       case 0:
@@ -42,13 +41,11 @@ class _CourseState extends State<Course> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Course'),
+        appBar: CustomAppBar(title: 'Result'),
         body: Padding(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              CustomSearchBar(),
-              SizedBox(height: 24),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
@@ -58,56 +55,41 @@ class _CourseState extends State<Course> {
                 ),
                 child: Column(
                   children: [
-                    CourseBuiltrow(label: 'Course Name :', value: 'ADCA'),
+                    CourseBuiltrow(label: 'Student Name :', value: 'Navya'),
+                    SizedBox(height: 4),
                     CourseBuiltrow(
-                      label: 'Starting Date  :',
-                      value: '12-8-2025',
+                      label: 'Roll No. :',
+                      value: 'PBR/24/12/ADCA-192/8',
                     ),
-                    CourseBuiltrow(label: 'Ending Date  :', value: '12-8-2026'),
-                    CourseBuiltrow(label: 'Mode :', value: 'Offline'),
-                    CourseBuiltrow(label: 'Course Fee :', value: '6500/-'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Reg.ID :', value: 'VC24F29B5'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(
+                      label: 'Test Name :',
+                      value: 'CHAPTER-15-GST',
+                    ),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Test Date :', value: '18/01/2025'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Test Time :', value: '10:54 AM'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Marks Obtained :', value: '44'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Total Marks :', value: '50'),
                   ],
                 ),
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 12),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.orange, width: 2),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Course Realted Notes',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-
-                    SizedBox(height: 24),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 12,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'View Notes',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: CourseBuiltrow(
+                  label: 'Batch Name :',
+                  value: 'TP08 - 29/03/2025',
                 ),
               ),
             ],

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/widgets/appbar.dart';
-import 'package:testapp/widgets/searchbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
-import 'package:testapp/screens/studyMaterial.dart';
+import 'package:testapp/widgets/test_result.dart';
 import 'package:testapp/screens/student_dashboard.dart';
+import 'package:testapp/screens/studyMaterial.dart';
 import 'package:testapp/screens/payment.dart';
 import 'package:testapp/screens/notice.dart';
 
-class Course extends StatefulWidget {
-  const Course({super.key});
+class Test extends StatefulWidget {
+  const Test({super.key});
 
   @override
-  State<Course> createState() => _CourseState();
+  State<Test> createState() => _TestState();
 }
 
-class _CourseState extends State<Course> {
+class _TestState extends State<Test> {
   void _navigateToPage(BuildContext context, int index) {
     switch (index) {
       case 0:
@@ -42,13 +42,11 @@ class _CourseState extends State<Course> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Course'),
+        appBar: CustomAppBar(title: 'Test'),
         body: Padding(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              CustomSearchBar(),
-              SizedBox(height: 24),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
@@ -58,55 +56,21 @@ class _CourseState extends State<Course> {
                 ),
                 child: Column(
                   children: [
-                    CourseBuiltrow(label: 'Course Name :', value: 'ADCA'),
                     CourseBuiltrow(
-                      label: 'Starting Date  :',
-                      value: '12-8-2025',
+                      label: 'Test Name :',
+                      value: 'CHAPTER-15-GST',
                     ),
-                    CourseBuiltrow(label: 'Ending Date  :', value: '12-8-2026'),
-                    CourseBuiltrow(label: 'Mode :', value: 'Offline'),
-                    CourseBuiltrow(label: 'Course Fee :', value: '6500/-'),
-                  ],
-                ),
-              ),
-              SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Course Realted Notes',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Batch :', value: 'TPQ8-29/03/2025'),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(
+                      label: 'Date&Time  :',
+                      value: '18/01/2081 10:54 AM',
                     ),
-
-                    SizedBox(height: 24),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 12,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'View Notes',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: 4),
+                    CourseBuiltrow(label: 'Status :', value: 'Submitted'),
+                    SizedBox(height: 4),
+                    TestBuiltrow(label: 'Action :', value: 'View Result'),
                   ],
                 ),
               ),

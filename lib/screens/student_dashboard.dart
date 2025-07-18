@@ -3,6 +3,7 @@ import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/builtrow.dart';
 import 'package:testapp/screens/course.dart';
 import 'package:testapp/screens/payment.dart';
+import 'package:testapp/screens/test.dart';
 
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({super.key});
@@ -20,7 +21,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
     Widget? nextPage, // 👈 Optional destination page
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: InkWell(
         onTap:
             onTap ??
@@ -253,7 +254,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           context,
                           'Test',
                           Icons.text_snippet,
-                          nextPage: StudentDashboard(),
+                          nextPage: Test(),
                         ),
                         _buildDrawerItem(
                           context,
@@ -273,7 +274,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.only(
+                    top: 0,
+                    right: 16,
+                    bottom: 16,
+                    left: 16,
+                  ),
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
