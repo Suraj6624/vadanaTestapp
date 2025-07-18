@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/utils/constant.dart';
 
 class BuiltRow extends StatelessWidget {
   final String label;

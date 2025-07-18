@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/builtrow.dart';
-import 'package:testapp/widgets/builtrowandelevation.dart';
+import 'package:testapp/screens/course.dart';
+import 'package:testapp/screens/payment.dart';
 
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({super.key});
@@ -11,18 +12,47 @@ class StudentDashboard extends StatefulWidget {
 }
 
 class _StudentDashboardState extends State<StudentDashboard> {
-  Widget _buildDrawerItem(String title, IconData icon, {VoidCallback? onTap}) {
-    return ListTile(
-      leading: Icon(icon, color: Color.fromARGB(255, 24, 95, 171)),
-      title: Text(
-        title,
-        style: TextStyle(color: Color.fromARGB(255, 43, 41, 41)),
+  Widget _buildDrawerItem(
+    BuildContext context,
+    String title,
+    IconData icon, {
+    VoidCallback? onTap,
+    Widget? nextPage, // 👈 Optional destination page
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      child: InkWell(
+        onTap:
+            onTap ??
+            () {
+              Navigator.pop(context);
+              if (nextPage != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => nextPage),
+                );
+              }
+            },
+        child: Row(
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: const Color.fromARGB(255, 24, 95, 171)),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 43, 41, 41),
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+          ],
+        ),
       ),
-      onTap:
-          onTap ??
-          () {
-            Navigator.pop(context); // Closes the drawer
-          },
     );
   }
 
@@ -193,32 +223,85 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     child: ListView(
                       children: [
                         SizedBox(height: 16),
-                        _buildDrawerItem('Home', Icons.home),
-
-                        _buildDrawerItem('Courses', Icons.menu_book),
-
-                        _buildDrawerItem('Payment', Icons.payment),
-
                         _buildDrawerItem(
-                          'Study Material',
-                          Icons.import_contacts,
+                          context,
+                          'Home',
+                          Icons.home,
+                          nextPage: StudentDashboard(),
+                        ),
+                        _buildDrawerItem(
+                          context,
+                          'Courses',
+                          Icons.menu_book,
+                          nextPage: Course(),
+                        ),
+                        _buildDrawerItem(
+                          context,
+                          'Payment',
+                          Icons.payment,
+                          nextPage: Payment(),
                         ),
 
-                        _buildDrawerItem('Test', Icons.text_snippet),
-                        _buildDrawerItem('Notice', Icons.notifications),
+                        _buildDrawerItem(
+                          context,
+                          'Study Material',
+                          Icons.import_contacts,
+                          nextPage: StudentDashboard(),
+                        ),
 
-                        _buildDrawerItem('Contact', Icons.phone),
+                        _buildDrawerItem(
+                          context,
+                          'Test',
+                          Icons.text_snippet,
+                          nextPage: StudentDashboard(),
+                        ),
+                        _buildDrawerItem(
+                          context,
+                          'Notice',
+                          Icons.notifications,
+                          nextPage: StudentDashboard(),
+                        ),
+
+                        _buildDrawerItem(
+                          context,
+                          'Contact',
+                          Icons.phone,
+                          nextPage: StudentDashboard(),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                _buildDrawerItem(
-                  'Logout',
-                  Icons.logout,
-                  onTap: () {
-                    Navigator.pop(context); // Close drawer
-                    Navigator.pop(context); // Navigate back to login
-                  },
+                Container(
+                  padding: EdgeInsets.all(8),
+                  width: double.infinity,
+                  child: InkWell(
+                    onTap: () {
+                      print('Tapped!');
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.logout,
+                          color: Color.fromARGB(255, 24, 95, 171),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Logout',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                        Spacer(),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -268,19 +351,106 @@ class _StudentDashboardState extends State<StudentDashboard> {
             padding: EdgeInsetsGeometry.all(16),
             child: Column(
               children: [
-                Card(
-                  color: Colors.white, // Background color
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Card(
+                      color: PRIME_BLUE,
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(24),
+                          topRight: Radius.circular(24),
+                          topLeft: Radius.circular(100),
+                          bottomLeft: Radius.circular(100),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          right: 16,
+                          bottom: 16,
+                          left: 32,
+                          top: 16,
+                        ),
 
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: const [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      color: Color.fromARGB(255, 103, 154, 208),
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      "Nikita Rathor singh",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.badge,
+                                      color: Colors.green,
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      "ID: VC24F29B5",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.book,
+                                      color: Color.fromARGB(255, 124, 139, 226),
+                                      size: 18,
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      "Course: ADCA",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    /// Image (partially outside)
+                    Positioned(
+                      left: -8, // adjust as needed
+                      top: 0, // vertically aligned with card
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 8),
+                        ),
+                        child: Container(
                           height: 80,
                           width: 80,
                           decoration: BoxDecoration(
@@ -294,75 +464,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             ),
                           ),
                         ),
-
-                        // Image section
-                        const SizedBox(width: 24), // Spacing
-                        // Text section with icons
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person,
-                                  color: Color.fromARGB(255, 24, 95, 171),
-                                  size: 18,
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  "Nikita Rathor singh",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: PRIME_BLACK,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.badge,
-                                  color: Colors.green,
-                                  size: 18,
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  "ID: VC24F29B5",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: PRIME_BLACK,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.book,
-                                  color: Colors.indigo,
-                                  size: 18,
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  "Course: ADCA",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: PRIME_BLACK,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+
                 SizedBox(height: 12),
                 Container(
                   decoration: BoxDecoration(
@@ -427,7 +533,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 SizedBox(height: 12),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.only(
+                    top: 4,
+                    right: 8,
+                    bottom: 8,
+                    left: 8,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(width: 2, color: Colors.orange),
                     borderRadius: BorderRadius.circular(12),
@@ -458,7 +569,24 @@ class _StudentDashboardState extends State<StudentDashboard> {
                               'Course Fee ₹6500/- :',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text('Fully Paid'),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 12,
+                                  ),
+                                ),
+                                Text('Fully Paid'),
+                              ],
+                            ),
                           ],
                         ),
                       ),
