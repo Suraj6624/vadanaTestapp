@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/controllers/course_controller.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/builtrow.dart';
 import 'package:testapp/screens/course.dart';
 import 'package:testapp/screens/payment.dart';
 import 'package:testapp/screens/test.dart';
 
-class StudentDashboard extends StatefulWidget {
+class StudentDashboard extends ConsumerStatefulWidget {
   const StudentDashboard({super.key});
 
   @override
-  State<StudentDashboard> createState() => _StudentDashboardState();
+  ConsumerState<StudentDashboard> createState() => _StudentDashboardState();
 }
 
-class _StudentDashboardState extends State<StudentDashboard> {
+class _StudentDashboardState extends ConsumerState<StudentDashboard> {
   Widget _buildDrawerItem(
     BuildContext context,
     String title,
@@ -108,6 +110,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final courses = ref.watch(courseListProvider);
+    // ref.refresh(courseListProvider);
+    print(courses);
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(
@@ -445,25 +450,33 @@ class _StudentDashboardState extends State<StudentDashboard> {
                     ),
 
                     /// Image (partially outside)
-                    Positioned(
-                      left: -8, // adjust as needed
-                      top: 0, // vertically aligned with card
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 8),
-                        ),
+                    InkWell(
+                      onTap: () {
+                        ref.refresh(courseListProvider);
+                      },
+                      child: Positioned(
+                        left: -8, // adjust as needed
+                        top: 0, // vertically aligned with card
                         child: Container(
-                          height: 80,
-                          width: 80,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.orange, width: 2),
-                            image: const DecorationImage(
-                              image: NetworkImage(
-                                'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
+                            border: Border.all(color: Colors.white, width: 8),
+                          ),
+                          child: Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.orange,
+                                width: 2,
                               ),
-                              fit: BoxFit.cover,
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                  'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
+                                ),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),

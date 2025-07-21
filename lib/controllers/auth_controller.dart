@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/repositoy/auth_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/utils/storage_util.dart';
 
 enum AuthStatus { initial, loading, success, error }
 
@@ -32,7 +34,11 @@ class AuthController extends StateNotifier<AuthState> {
     state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
     try {
       final result = await repository.login(phone, password);
+
       state = state.copyWith(status: AuthStatus.success, user: result);
+      // print(state.user!['user']);
+      StorageUtil.saveString("token", state.user!['token']);
+      StorageUtil.saveJson("user", state.user!['user']);
     } catch (e) {
       state = state.copyWith(
         status: AuthStatus.error,

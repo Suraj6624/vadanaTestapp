@@ -15,7 +15,7 @@ class AuthRepository {
   }
 
   Future<Map<String, dynamic>> getProfile(String token) async {
-    final response = await dioClient.getWithToken('profile', token: token);
+    final response = await dioClient.getWithToken('profile');
     return response.data;
   }
 }

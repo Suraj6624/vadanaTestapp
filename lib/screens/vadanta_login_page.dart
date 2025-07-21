@@ -38,7 +38,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
 
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.05),
+                    // color: Colors.black.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   padding: const EdgeInsets.all(16),
@@ -51,7 +51,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0,
-                            color: Color.fromARGB(255, 24, 95, 171),
+                            color: Colors.black,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -62,8 +62,8 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                           child: Text(
                             'Enter Phone Number',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 24, 95, 171),
+                              // fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -75,6 +75,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: "Phone Number",
+
                               hintStyle: TextStyle(color: Colors.grey.shade400),
                               prefixIcon: Icon(
                                 Icons.phone,
@@ -95,8 +96,8 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                           child: Text(
                             'Password',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 24, 95, 171),
+                              // fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -107,6 +108,11 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             controller: _studentPasswordController,
                             obscureText: true,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+
                               hintText: "Password",
                               hintStyle: TextStyle(color: Colors.grey.shade400),
                               prefixIcon: Icon(
@@ -141,7 +147,10 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             ),
                             TextButton(
                               onPressed: () {},
-                              child: const Text('Forgot?'),
+                              child: const Text(
+                                'Forgot?',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                           ],
                         ),
@@ -194,8 +203,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              updatedAuth.errorMessage ??
-                                                  'Login failed',
+                                              'Incorrect login details',
                                               style: const TextStyle(
                                                 color: Colors.red,
                                               ),
@@ -206,12 +214,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                                     }
                                   },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(
-                                255,
-                                24,
-                                95,
-                                171,
-                              ),
+                              backgroundColor: Colors.orange,
                               foregroundColor: Colors.white,
                             ),
                             child: authState.status == AuthStatus.loading

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/utils/app_constants.dart';
+import 'package:testapp/utils/storage_util.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   return Dio(
@@ -43,10 +44,11 @@ class DioClient {
   /// GET request with token
   Future<Response> getWithToken(
     String path, {
-    required String token,
+
     Map<String, dynamic>? queryParams,
   }) async {
     try {
+      String? token = await StorageUtil.getString("token");
       final res = await dio.get(
         path,
         queryParameters: queryParams,
@@ -62,10 +64,11 @@ class DioClient {
   /// POST request with token
   Future<Response> postWithToken(
     String path, {
-    required String token,
+
     Map<String, dynamic>? data,
   }) async {
     try {
+      String? token = await StorageUtil.getString("token");
       final res = await dio.post(
         path,
         data: data,
