@@ -1,202 +1,232 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/controllers/auth_controller.dart';
 
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/screens/student_dashboard.dart';
 
-class StudentLogin extends StatefulWidget {
+class StudentLogin extends ConsumerStatefulWidget {
   const StudentLogin({super.key});
 
   @override
-  State<StudentLogin> createState() => _StudentLoginState();
+  ConsumerState<StudentLogin> createState() => _StudentLoginState();
 }
 
-class _StudentLoginState extends State<StudentLogin> {
+class _StudentLoginState extends ConsumerState<StudentLogin> {
   final _formKey = GlobalKey<FormState>();
-  final _StudentIdController = TextEditingController();
-  final _StudentPassword = TextEditingController();
+  final _studentIdController = TextEditingController();
+  final _studentPasswordController = TextEditingController();
   bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(top: 50, right: 20, bottom: 20, left: 20),
-
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
             child: Column(
               children: [
-                Container(
-                  child: Image.network(
-                    "https://vfpatna.com/assets/vf_logo.png",
-                    height: 60,
-                  ),
+                Image.network(
+                  "https://vfpatna.com/assets/vf_logo.png",
+                  height: 60,
                 ),
-                SizedBox(height: 56),
+                const SizedBox(height: 56),
 
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding: const EdgeInsets.all(16),
                   child: Form(
                     key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: Alignment.center,
+                        const Text(
+                          'Student Login',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                            color: Color.fromARGB(255, 24, 95, 171),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Phone Input
+                        const Align(
+                          alignment: Alignment.centerLeft,
                           child: Text(
-                            'Student Login',
+                            'Enter Phone Number',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 24.0,
                               color: Color.fromARGB(255, 24, 95, 171),
                             ),
                           ),
                         ),
-                        SizedBox(height: 16),
-                        const Text(
-                          'Enter Vedanta ID',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 24, 95, 171),
-                          ),
-                        ),
-                        SizedBox(height: 6),
+                        const SizedBox(height: 6),
                         SizedBox(
                           height: 42,
                           child: TextFormField(
-                            controller: _StudentIdController,
-
+                            controller: _studentIdController,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              hint: Text("Student Id Number"),
-                              hintStyle: TextStyle(
-                                color: Colors.grey.withOpacity(0.05),
+                              hintText: "Phone Number",
+                              hintStyle: TextStyle(color: Colors.grey.shade400),
+                              prefixIcon: Icon(
+                                Icons.phone,
+                                color: PRIMARY_COLOR,
                               ),
-                              prefixIcon: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.6),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(
-                                  Icons.perm_identity,
-                                  color: PRIMARY_COLOR,
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.all(0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 24, 95, 171),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        const Text(
-                          'Password',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 24, 95, 171),
-                          ),
-                        ),
-                        SizedBox(height: 6),
-                        SizedBox(
-                          height: 42,
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _StudentPassword,
-
-                            decoration: InputDecoration(
-                              hint: Text("Password"),
-                              hintStyle: TextStyle(
-                                color: Colors.grey.withOpacity(0.05),
-                              ),
-                              prefixIcon: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.6),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(
-                                  Icons.password,
-                                  color: PRIMARY_COLOR,
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.all(0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 24, 95, 171),
-                                ),
                               ),
                             ),
                           ),
                         ),
 
-                        SizedBox(height: 16),
-                        SizedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: isChecked,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isChecked = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text('Remember me', style: TextStyle()),
-                                ],
-                              ),
+                        const SizedBox(height: 16),
 
-                              TextButton(
-                                child: Text('Forget?'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.black.withOpacity(
-                                    0.6,
-                                  ),
-                                ),
-                                onPressed: () {},
-                              ),
-                            ],
+                        // Password Input
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 24, 95, 171),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 6),
+                        SizedBox(
+                          height: 42,
+                          child: TextFormField(
+                            controller: _studentPasswordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.grey.shade400),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                color: PRIMARY_COLOR,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Remember and Forgot
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isChecked = val ?? false;
+                                    });
+                                  },
+                                ),
+                                const Text('Remember me'),
+                              ],
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text('Forgot?'),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Submit Button
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            child: Text('Login'),
+                            onPressed: authState.status == AuthStatus.loading
+                                ? null
+                                : () async {
+                                    final phone = _studentIdController.text
+                                        .trim();
+                                    final pass = _studentPasswordController.text
+                                        .trim();
 
+                                    if (phone.isEmpty || pass.isEmpty) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Please fill all fields',
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      await ref
+                                          .read(authControllerProvider.notifier)
+                                          .login(phone, pass);
+
+                                      final updatedAuth = ref.read(
+                                        authControllerProvider,
+                                      );
+                                      if (updatedAuth.status ==
+                                          AuthStatus.success) {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const StudentDashboard(),
+                                          ),
+                                        );
+                                      } else if (updatedAuth.status ==
+                                          AuthStatus.error) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              updatedAuth.errorMessage ??
+                                                  'Login failed',
+                                              style: const TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 24, 95, 171),
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                24,
+                                95,
+                                171,
+                              ),
                               foregroundColor: Colors.white,
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => StudentDashboard(),
-                                ),
-                              );
-                            },
+                            child: authState.status == AuthStatus.loading
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Text("Login"),
                           ),
                         ),
 
-                        SizedBox(height: 16),
+                        const SizedBox(height: 8),
                       ],
                     ),
                   ),

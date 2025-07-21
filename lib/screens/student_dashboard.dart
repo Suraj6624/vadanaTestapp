@@ -339,10 +339,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
             Padding(
               padding: EdgeInsets.only(right: 20),
               child: IconButton(
-                icon: Icon(
-                  Icons.notifications,
-                  color: const Color.fromARGB(255, 184, 169, 32),
-                ),
+                icon: Icon(Icons.notifications, color: Colors.orange),
 
                 onPressed: () {
                   print("notification clicked");

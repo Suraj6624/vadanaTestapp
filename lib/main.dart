@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // ✅ Import Riverpod
 import 'package:testapp/vadantasplash.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      // ✅ Wrap your app in ProviderScope
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +33,7 @@ class MyApp extends StatelessWidget {
 
 class SliderRightTransitionBuilder extends PageTransitionsBuilder {
   const SliderRightTransitionBuilder();
+
   @override
   Widget buildTransitions<T>(
     PageRoute<T> route,
@@ -38,7 +44,7 @@ class SliderRightTransitionBuilder extends PageTransitionsBuilder {
   ) {
     return SlideTransition(
       position: Tween<Offset>(
-        begin: const Offset(1.0, 0.0),
+        begin: const Offset(1.0, 0.0), // slide in from right
         end: Offset.zero,
       ).animate(animation),
       child: child,
