@@ -17,7 +17,7 @@ class BuiltRow extends StatelessWidget {
     required this.value,
 
     this.labelColor = Colors.white,
-    this.valueColor = Colors.white,
+    this.valueColor = Colors.green,
   });
 
   @override

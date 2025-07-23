@@ -1,23 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/providers/dio_provider.dart';
+import 'package:testapp/providers/get_auth_token.dart';
 import 'package:testapp/utils/app_constants.dart';
 import 'package:testapp/utils/storage_util.dart';
 
-final dioProvider = Provider<Dio>((ref) {
-  return Dio(
-    BaseOptions(
-      baseUrl: AppConstants.baseUrl,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    ),
-  );
-});
+/// Provides Dio instance
 
+/// Dio client class with all HTTP methods
 class DioClient {
   final Dio dio;
-  DioClient(this.dio);
+  final Ref ref;
+
+  DioClient(this.dio, this.ref);
 
   /// GET request without token
   Future<Response> get(String path, {Map<String, dynamic>? queryParams}) async {
@@ -44,11 +39,10 @@ class DioClient {
   /// GET request with token
   Future<Response> getWithToken(
     String path, {
-
     Map<String, dynamic>? queryParams,
   }) async {
     try {
-      String? token = await StorageUtil.getString("token");
+      final token = await ref.read(getAuthTokenProvider.future);
       final res = await dio.get(
         path,
         queryParameters: queryParams,
@@ -64,11 +58,10 @@ class DioClient {
   /// POST request with token
   Future<Response> postWithToken(
     String path, {
-
     Map<String, dynamic>? data,
   }) async {
     try {
-      String? token = await StorageUtil.getString("token");
+      final token = await ref.read(getAuthTokenProvider.future);
       final res = await dio.post(
         path,
         data: data,
@@ -82,13 +75,12 @@ class DioClient {
   }
 
   void _handleDioError(DioException e) {
-    // Optional: log or customize error messages
     print('Dio Error => ${e.message}, ${e.response?.data}');
   }
 }
 
-/// Provide DioClient with dependency injection
+/// Provides DioClient instance with injected Dio and Ref
 final dioClientProvider = Provider<DioClient>((ref) {
   final dio = ref.watch(dioProvider);
-  return DioClient(dio);
+  return DioClient(dio, ref);
 });

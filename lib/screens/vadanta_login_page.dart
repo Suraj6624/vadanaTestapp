@@ -75,7 +75,10 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: "Phone Number",
-
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
                               hintStyle: TextStyle(color: Colors.grey.shade400),
                               prefixIcon: Icon(
                                 Icons.phone,

@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/providers/get_auth_token.dart';
+import 'package:testapp/screens/student_dashboard.dart';
 import 'package:testapp/screens/vadanta_login_page.dart';
 
-class Vadantasplash extends StatefulWidget {
+class Vadantasplash extends ConsumerStatefulWidget {
   const Vadantasplash({super.key});
 
   @override
-  State<Vadantasplash> createState() => _VadantasplashState();
+  ConsumerState<Vadantasplash> createState() => _VadantasplashState();
 }
 
-class _VadantasplashState extends State<Vadantasplash>
+class _VadantasplashState extends ConsumerState<Vadantasplash>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
     );
+
     _animation = Tween<double>(
       begin: 0.5,
       end: 1.5,
@@ -25,12 +32,23 @@ class _VadantasplashState extends State<Vadantasplash>
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () async {
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const StudentLogin()),
-        );
+        final token = await ref.read(getAuthTokenProvider.future);
+
+        if (token == null || token.isEmpty) {
+          // No token, go to login
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const StudentLogin()),
+          );
+        } else {
+          // Token exists, go to dashboard (replace with your target screen)
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const StudentDashboard()),
+          );
+        }
       }
     });
   }
@@ -55,7 +73,7 @@ class _VadantasplashState extends State<Vadantasplash>
               height: 150,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
-                return Text('Image failed to load');
+                return const Text('Image failed to load');
               },
             ),
           ),

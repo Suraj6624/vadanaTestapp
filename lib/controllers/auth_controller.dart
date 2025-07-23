@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/repositoy/auth_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/utils/storage_util.dart';
 
 enum AuthStatus { initial, loading, success, error }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/controllers/course_controller.dart';
+import 'package:testapp/providers/course_list_provider.dart';
+import 'package:testapp/providers/get_user_provider.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/builtrow.dart';
 import 'package:testapp/screens/course.dart';
@@ -110,9 +112,9 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final courses = ref.watch(courseListProvider);
-    // ref.refresh(courseListProvider);
-    print(courses);
+    final courses = ref.watch(getCourseListProvider);
+    final userSync = ref.watch(getUserInfoProvider);
+
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(
@@ -121,103 +123,129 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
           child: SafeArea(
             child: Column(
               children: [
-                Container(
-                  color: Colors.blue,
-                  height: 200,
+                userSync.when(
+                  loading: () {
+                    return CircularProgressIndicator();
+                  },
+                  error: (error, stackTrace) {
+                    return CircularProgressIndicator();
+                  },
+                  data: (data) {
+                    return Container(
+                      color: Colors.blue,
+                      height: 200,
 
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                            bottom: BorderSide(
-                              color: const Color.fromARGB(255, 122, 178, 223),
-                              width: 10,
-                            ),
-                            top: BorderSide(
-                              color: const Color.fromARGB(255, 122, 178, 223),
-                              width: 10,
-                            ),
-                            right: BorderSide(
-                              color: const Color.fromARGB(255, 122, 178, 223),
-                              width: 10,
-                            ),
-                            left: BorderSide.none,
-                          ),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(
-                              140,
-                            ), // makes top-right corner rounded
-                            bottomRight: Radius.circular(
-                              140,
-                            ), // makes bottom-right corner rounded
-                          ),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          height: 100,
-
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(
-                                100,
-                              ), // makes top-right corner rounded
-                              bottomRight: Radius.circular(
-                                100,
-                              ), // makes bottom-right corner rounded
-                            ),
-                          ),
-                          child: Container(
-                            height: 80,
-                            width: 80,
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 150,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.orange,
-                                width: 3,
-                              ),
-                              image: const DecorationImage(
-                                image: NetworkImage(
-                                  'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
+                              color: Colors.white,
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    122,
+                                    178,
+                                    223,
+                                  ),
+                                  width: 10,
                                 ),
-                                // fit: BoxFit.cover,
+                                top: BorderSide(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    122,
+                                    178,
+                                    223,
+                                  ),
+                                  width: 10,
+                                ),
+                                right: BorderSide(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    122,
+                                    178,
+                                    223,
+                                  ),
+                                  width: 10,
+                                ),
+                                left: BorderSide.none,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(
+                                  140,
+                                ), // makes top-right corner rounded
+                                bottomRight: Radius.circular(
+                                  140,
+                                ), // makes bottom-right corner rounded
+                              ),
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              height: 100,
+
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(
+                                    100,
+                                  ), // makes top-right corner rounded
+                                  bottomRight: Radius.circular(
+                                    100,
+                                  ), // makes bottom-right corner rounded
+                                ),
+                              ),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.orange,
+                                    width: 3,
+                                  ),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      'https://m6.wamarket.cloud${data!.image}',
+                                    ),
+                                    // fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
 
-                      Container(
-                        padding: EdgeInsets.only(left: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Hello',
-                              style: TextStyle(color: Colors.white),
+                          Container(
+                            padding: EdgeInsets.only(left: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Hello',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  '${data!.name}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  '${data.autoStuId}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'Nikita Singh Rathor',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              'VC24F29B5',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
+
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -362,125 +390,134 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Card(
-                      color: PRIME_BLUE,
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(24),
-                          topRight: Radius.circular(24),
-                          topLeft: Radius.circular(100),
-                          bottomLeft: Radius.circular(100),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 16,
-                          bottom: 16,
-                          left: 32,
-                          top: 16,
-                        ),
+                    userSync.when(
+                      loading: () {
+                        return CircularProgressIndicator();
+                      },
+                      error: (error, stackTrace) {
+                        return CircularProgressIndicator();
+                      },
+                      data: (data) {
+                        return Card(
+                          color: PRIME_BLUE,
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                              topLeft: Radius.circular(100),
+                              bottomLeft: Radius.circular(100),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 16,
+                              bottom: 16,
+                              left: 32,
+                              top: 16,
+                            ),
 
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: const [
-                                Row(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
                                   children: [
-                                    Icon(
-                                      Icons.person,
-                                      color: Color.fromARGB(255, 103, 154, 208),
-                                      size: 18,
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          color: Color.fromARGB(
+                                            255,
+                                            103,
+                                            154,
+                                            208,
+                                          ),
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 6),
+                                        Text(
+                                          "${data!.name}",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "Nikita Rathor singh",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.badge,
-                                      color: Colors.green,
-                                      size: 18,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "ID: VC24F29B5",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.book,
-                                      color: Color.fromARGB(255, 124, 139, 226),
-                                      size: 18,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "Course: ADCA",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                                    SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.badge,
+                                          color: Colors.green,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 6),
+                                        Text(
+                                          "ID: ${data.autoStuId}",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        );
+                      },
                     ),
 
                     /// Image (partially outside)
-                    InkWell(
-                      onTap: () {
-                        ref.refresh(courseListProvider);
+                    userSync.when(
+                      loading: () {
+                        return CircularProgressIndicator();
                       },
-                      child: Positioned(
-                        left: -8, // adjust as needed
-                        top: 0, // vertically aligned with card
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 8),
-                          ),
-                          child: Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.orange,
-                                width: 2,
-                              ),
-                              image: const DecorationImage(
-                                image: NetworkImage(
-                                  'https://vfpatna.com/assets/mUpload/1735040000NAVYA.jpg',
+                      error: (error, stackTrace) {
+                        return CircularProgressIndicator();
+                      },
+                      data: (data) {
+                        return InkWell(
+                          onTap: () {
+                            ref.refresh(getCourseListProvider);
+                          },
+                          child: Positioned(
+                            left: -8, // adjust as needed
+                            top: 0, // vertically aligned with card
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 8,
                                 ),
-                                fit: BoxFit.cover,
+                              ),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.orange,
+                                    width: 2,
+                                  ),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      'https://m6.wamarket.cloud${data!.image}',
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -497,7 +534,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                   padding: EdgeInsets.only(top: 16, bottom: 16),
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -520,7 +557,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                       ),
 
                       SizedBox(height: 16),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
 
                         child: Row(

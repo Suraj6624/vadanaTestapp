@@ -7,15 +7,15 @@ class CourseModel {
     if (json['courses'] != null) {
       courses = <Courses>[];
       json['courses'].forEach((v) {
-        courses!.add(new Courses.fromJson(v));
+        courses!.add(Courses.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.courses != null) {
-      data['courses'] = this.courses!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (courses != null) {
+      data['courses'] = courses!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -29,20 +29,20 @@ class Courses {
 
   Courses.fromJson(Map<String, dynamic> json) {
     course = json['course'] != null
-        ? new Course.fromJson(json['course'])
+        ? Course.fromJson(json['course'])
         : null;
     payment = json['payment'] != null
-        ? new Payment.fromJson(json['payment'])
+        ? Payment.fromJson(json['payment'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.course != null) {
-      data['course'] = this.course!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (course != null) {
+      data['course'] = course!.toJson();
     }
-    if (this.payment != null) {
-      data['payment'] = this.payment!.toJson();
+    if (payment != null) {
+      data['payment'] = payment!.toJson();
     }
     return data;
   }
@@ -58,10 +58,10 @@ class Course {
   int? totalEmi;
   String? createdAt;
   String? updatedAt;
-  Null? orgId;
-  Null? image;
+  Null orgId;
+  Null image;
   String? shortDescription;
-  Null? description;
+  Null description;
   int? userId;
   int? parentsId;
   String? paymentType;
@@ -105,23 +105,23 @@ class Course {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    data['status'] = this.status;
-    data['price'] = this.price;
-    data['offer_price'] = this.offerPrice;
-    data['total_emi'] = this.totalEmi;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['org_id'] = this.orgId;
-    data['image'] = this.image;
-    data['short_description'] = this.shortDescription;
-    data['description'] = this.description;
-    data['user_id'] = this.userId;
-    data['parents_id'] = this.parentsId;
-    data['payment_type'] = this.paymentType;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['slug'] = slug;
+    data['status'] = status;
+    data['price'] = price;
+    data['offer_price'] = offerPrice;
+    data['total_emi'] = totalEmi;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['org_id'] = orgId;
+    data['image'] = image;
+    data['short_description'] = shortDescription;
+    data['description'] = description;
+    data['user_id'] = userId;
+    data['parents_id'] = parentsId;
+    data['payment_type'] = paymentType;
     return data;
   }
 }
@@ -132,14 +132,14 @@ class Payment {
   int? courseId;
   int? amount;
   String? remarks;
-  Null? officialRemarks;
+  Null officialRemarks;
   String? mode;
   String? paymentDate;
-  Null? paymentTime;
+  Null paymentTime;
   String? createdAt;
   String? updatedAt;
   int? collectedBy;
-  Null? orgId;
+  Null orgId;
   String? paymentType;
   int? syncId;
 
@@ -180,22 +180,22 @@ class Payment {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['course_id'] = this.courseId;
-    data['amount'] = this.amount;
-    data['remarks'] = this.remarks;
-    data['official_remarks'] = this.officialRemarks;
-    data['mode'] = this.mode;
-    data['payment_date'] = this.paymentDate;
-    data['payment_time'] = this.paymentTime;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['collected_by'] = this.collectedBy;
-    data['org_id'] = this.orgId;
-    data['payment_type'] = this.paymentType;
-    data['sync_id'] = this.syncId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['course_id'] = courseId;
+    data['amount'] = amount;
+    data['remarks'] = remarks;
+    data['official_remarks'] = officialRemarks;
+    data['mode'] = mode;
+    data['payment_date'] = paymentDate;
+    data['payment_time'] = paymentTime;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['collected_by'] = collectedBy;
+    data['org_id'] = orgId;
+    data['payment_type'] = paymentType;
+    data['sync_id'] = syncId;
     return data;
   }
 }
