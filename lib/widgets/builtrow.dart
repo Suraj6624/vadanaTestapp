@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/utils/constant.dart';
 
 class BuiltRow extends StatelessWidget {
   final String label;
@@ -16,8 +17,8 @@ class BuiltRow extends StatelessWidget {
     required this.label,
     required this.value,
 
-    this.labelColor = Colors.white,
-    this.valueColor = Colors.green,
+    this.labelColor = PRIME_WHITE,
+    this.valueColor = PRIME_WHITE,
   });
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/utils/constant.dart';
 
 class CourseBuiltrow extends StatelessWidget {
   final String label;
@@ -13,8 +14,8 @@ class CourseBuiltrow extends StatelessWidget {
     required this.label,
     required this.value,
 
-    this.labelColor = Colors.black,
-    this.valueColor = Colors.black,
+    this.labelColor = PRIME_BLACK,
+    this.valueColor = PRIME_BLACK,
   });
 
   @override

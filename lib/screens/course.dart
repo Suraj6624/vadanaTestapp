@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/providers/course_list_provider.dart';
+import 'package:testapp/providers/get_user_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/searchbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
 import 'package:testapp/screens/studyMaterial.dart';
 import 'package:testapp/screens/student_dashboard.dart';
+import 'package:testapp/controllers/course_controller.dart';
 import 'package:testapp/screens/payment.dart';
 import 'package:testapp/screens/notice.dart';
 
-class Course extends StatefulWidget {
+class Course extends ConsumerStatefulWidget {
   const Course({super.key});
 
   @override
-  State<Course> createState() => _CourseState();
+  ConsumerState<Course> createState() => _CourseState();
 }
 
-class _CourseState extends State<Course> {
+class _CourseState extends ConsumerState<Course> {
   void _navigateToPage(BuildContext context, int index) {
     switch (index) {
       case 0:
@@ -40,6 +45,7 @@ class _CourseState extends State<Course> {
 
   @override
   Widget build(BuildContext context) {
+    final userSync = ref.watch(getUserInfoProvider);
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(title: 'Course'),
@@ -49,32 +55,46 @@ class _CourseState extends State<Course> {
             children: [
               CustomSearchBar(),
               SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    CourseBuiltrow(label: 'Course Name :', value: 'ADCA'),
-                    CourseBuiltrow(
-                      label: 'Starting Date  :',
-                      value: '12-8-2025',
+              userSync.when(
+                loading: () {
+                  return CircularProgressIndicator();
+                },
+                error: (error, stackTrace) {
+                  return CircularProgressIndicator();
+                },
+                data: (data) {
+                  return Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: PRIME_ORANGE, width: 2),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    CourseBuiltrow(label: 'Ending Date  :', value: '12-8-2026'),
-                    CourseBuiltrow(label: 'Mode :', value: 'Offline'),
-                    CourseBuiltrow(label: 'Course Fee :', value: '6500/-'),
-                  ],
-                ),
+
+                    child: Column(
+                      children: [
+                        CourseBuiltrow(label: 'Course Name :', value: 'ADCA'),
+                        CourseBuiltrow(
+                          label: 'Starting Date  :',
+                          value: '12-8-2025',
+                        ),
+                        CourseBuiltrow(
+                          label: 'Starting Date   :',
+                          value: '12-8-2025',
+                        ),
+                        CourseBuiltrow(label: 'Mode :', value: 'Offline'),
+                        CourseBuiltrow(label: 'Course Fee :', value: '6500/-'),
+                      ],
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 24),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
+                  border: Border.all(color: PRIME_ORANGE, width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -95,7 +115,7 @@ class _CourseState extends State<Course> {
                         horizontal: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: PRIME_ORANGE,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -103,7 +123,7 @@ class _CourseState extends State<Course> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.white,
+                          color: PRIME_WHITE,
                         ),
                       ),
                     ),
@@ -114,13 +134,13 @@ class _CourseState extends State<Course> {
           ),
         ),
         bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.blue),
+          data: Theme.of(context).copyWith(canvasColor: PRIMARY_COLOR),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (index) => _navigateToPage(context, index),
 
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
+            selectedItemColor: PRIME_WHITE,
+            unselectedItemColor: PRIME_WHITE,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
               BottomNavigationBarItem(

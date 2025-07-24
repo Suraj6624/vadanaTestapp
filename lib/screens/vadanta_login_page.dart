@@ -23,7 +23,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
     final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: PRIME_WHITE,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -51,7 +51,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0,
-                            color: Colors.black,
+                            color: PRIME_BLACK,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -63,7 +63,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             'Enter Phone Number',
                             style: TextStyle(
                               // fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: PRIME_BLACK,
                             ),
                           ),
                         ),
@@ -100,7 +100,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                             'Password',
                             style: TextStyle(
                               // fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: PRIME_BLACK,
                             ),
                           ),
                         ),
@@ -152,7 +152,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                               onPressed: () {},
                               child: const Text(
                                 'Forgot?',
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: PRIME_BLACK),
                               ),
                             ),
                           ],
@@ -217,8 +217,8 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                                     }
                                   },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              foregroundColor: Colors.white,
+                              backgroundColor: PRIME_ORANGE,
+                              foregroundColor: PRIME_WHITE,
                             ),
                             child: authState.status == AuthStatus.loading
                                 ? const SizedBox(

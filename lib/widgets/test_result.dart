@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/screens/result.dart';
+import 'package:testapp/utils/constant.dart';
 
 class TestBuiltrow extends StatelessWidget {
   final String label;
@@ -14,8 +15,8 @@ class TestBuiltrow extends StatelessWidget {
     required this.label,
     required this.value,
 
-    this.labelColor = Colors.black,
-    this.valueColor = Colors.white,
+    this.labelColor = PRIME_BLACK,
+    this.valueColor = PRIME_WHITE,
   });
 
   @override
@@ -41,7 +42,7 @@ class TestBuiltrow extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
-              color: Colors.orange,
+              color: PRIME_ORANGE,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(

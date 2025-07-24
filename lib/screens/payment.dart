@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
 
@@ -24,7 +25,7 @@ class _PaymentState extends State<Payment> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(width: 2, color: Colors.black),
+                      bottom: BorderSide(width: 2, color: PRIME_BLACK),
                     ),
                   ),
 
@@ -40,7 +41,7 @@ class _PaymentState extends State<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
+                  border: Border.all(color: PRIME_ORANGE, width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -59,7 +60,7 @@ class _PaymentState extends State<Payment> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(width: 2, color: Colors.black),
+                      bottom: BorderSide(width: 2, color: PRIME_BLACK),
                     ),
                   ),
 
@@ -75,7 +76,7 @@ class _PaymentState extends State<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
+                  border: Border.all(color: PRIME_ORANGE, width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
 import 'package:testapp/widgets/test_result.dart';
@@ -51,7 +52,7 @@ class _TestState extends State<Test> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.orange, width: 2),
+                  border: Border.all(color: PRIME_ORANGE, width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -78,13 +79,13 @@ class _TestState extends State<Test> {
           ),
         ),
         bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.blue),
+          data: Theme.of(context).copyWith(canvasColor: PRIMARY_COLOR),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (index) => _navigateToPage(context, index),
 
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
+            selectedItemColor: PRIME_WHITE,
+            unselectedItemColor: PRIME_WHITE,
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
               BottomNavigationBarItem(

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/providers/get_auth_token.dart';
 import 'package:testapp/screens/student_dashboard.dart';
 import 'package:testapp/screens/vadanta_login_page.dart';
+import 'package:testapp/utils/constant.dart';
 
 class Vadantasplash extends ConsumerStatefulWidget {
   const Vadantasplash({super.key});
@@ -62,7 +63,7 @@ class _VadantasplashState extends ConsumerState<Vadantasplash>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: PRIME_WHITE,
       body: SafeArea(
         child: Center(
           child: ScaleTransition(

@@ -42,19 +42,16 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
           children: [
             Row(
               children: [
-                Icon(icon, color: const Color.fromARGB(255, 24, 95, 171)),
+                Icon(icon, color: PRIME_BLUE),
                 const SizedBox(width: 8),
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(255, 43, 41, 41),
-                  ),
+                  style: const TextStyle(fontSize: 16, color: PRIMAY_BLACK),
                 ),
               ],
             ),
             const Spacer(),
-            const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black),
+            const Icon(Icons.arrow_forward_ios, size: 16, color: PRIME_BLACK),
           ],
         ),
       ),
@@ -69,7 +66,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
   ) {
     return SizedBox(
       child: Card(
-        color: Colors.white,
+        color: PRIME_WHITE,
 
         elevation: 3,
 
@@ -78,8 +75,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
-            color: Colors.white,
-            border: Border.all(width: 2.0, color: Colors.orange),
+            color: PRIME_WHITE,
           ),
 
           child: Column(
@@ -119,7 +115,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
       child: Scaffold(
         drawer: Drawer(
           width: MediaQuery.of(context).size.width * 0.8,
-          backgroundColor: Colors.white,
+          backgroundColor: PRIME_WHITE,
           child: SafeArea(
             child: Column(
               children: [
@@ -132,7 +128,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                   },
                   data: (data) {
                     return Container(
-                      color: Colors.blue,
+                      color: PRIME_BLUE,
                       height: 200,
 
                       child: Row(
@@ -140,33 +136,18 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                           Container(
                             height: 150,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: PRIME_WHITE,
                               border: Border(
                                 bottom: BorderSide(
-                                  color: const Color.fromARGB(
-                                    255,
-                                    122,
-                                    178,
-                                    223,
-                                  ),
+                                  color: PRIMARY_COLOR,
                                   width: 10,
                                 ),
                                 top: BorderSide(
-                                  color: const Color.fromARGB(
-                                    255,
-                                    122,
-                                    178,
-                                    223,
-                                  ),
+                                  color: PRIMARY_COLOR,
                                   width: 10,
                                 ),
                                 right: BorderSide(
-                                  color: const Color.fromARGB(
-                                    255,
-                                    122,
-                                    178,
-                                    223,
-                                  ),
+                                  color: PRIMARY_COLOR,
                                   width: 10,
                                 ),
                                 left: BorderSide.none,
@@ -185,7 +166,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                               height: 100,
 
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: PRIME_WHITE,
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(
                                     100,
@@ -201,7 +182,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: Colors.orange,
+                                    color: PRIME_ORANGE,
                                     width: 3,
                                   ),
                                   image: DecorationImage(
@@ -223,19 +204,19 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                               children: [
                                 Text(
                                   'Hello',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: PRIME_WHITE),
                                 ),
                                 Text(
                                   '${data!.name}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
-                                    color: Colors.white,
+                                    color: PRIME_WHITE,
                                   ),
                                 ),
                                 Text(
                                   '${data.autoStuId}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: PRIME_WHITE),
                                 ),
                               ],
                             ),
@@ -315,15 +296,10 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                   ),
                   width: double.infinity,
                   child: InkWell(
-                    onTap: () {
-                      print('Tapped!');
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.logout,
-                          color: Color.fromARGB(255, 24, 95, 171),
-                        ),
+                        Icon(Icons.logout, color: PRIMARY_COLOR),
                         SizedBox(width: 8),
                         Text(
                           'Logout',
@@ -336,7 +312,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                         const Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
-                          color: Colors.black,
+                          color: PRIME_BLACK,
                         ),
                       ],
                     ),
@@ -348,14 +324,14 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
         ),
 
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: PRIME_WHITE,
           elevation: 2,
           centerTitle: true,
           leading: Padding(
             padding: EdgeInsets.only(left: 20),
             child: Builder(
               builder: (context) => IconButton(
-                icon: const Icon(Icons.menu, color: Colors.black),
+                icon: const Icon(Icons.menu, color: PRIME_BLACK),
                 onPressed: () {
                   Scaffold.of(context).openDrawer(); // Opens the side drawer
                 },
@@ -372,7 +348,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
             Padding(
               padding: EdgeInsets.only(right: 20),
               child: IconButton(
-                icon: Icon(Icons.notifications, color: Colors.orange),
+                icon: Icon(Icons.notifications, color: PRIME_ORANGE),
 
                 onPressed: () {
                   print("notification clicked");
@@ -381,7 +357,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
             ),
           ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 239, 249, 255),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsetsGeometry.all(16),
@@ -426,12 +402,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                       children: [
                                         Icon(
                                           Icons.person,
-                                          color: Color.fromARGB(
-                                            255,
-                                            103,
-                                            154,
-                                            208,
-                                          ),
+                                          color: PRIMARY_COLOR,
                                           size: 18,
                                         ),
                                         SizedBox(width: 6),
@@ -440,7 +411,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                            color: PRIME_WHITE,
                                           ),
                                         ),
                                       ],
@@ -459,7 +430,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                            color: PRIME_WHITE,
                                           ),
                                         ),
                                       ],
@@ -490,20 +461,20 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                             left: -8, // adjust as needed
                             top: 0, // vertically aligned with card
                             child: Container(
+                              height: 80,
+                              width: 80,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Colors.white,
+                                  color: PRIME_WHITE,
                                   width: 8,
                                 ),
                               ),
                               child: Container(
-                                height: 80,
-                                width: 80,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: Colors.orange,
+                                    color: PRIME_ORANGE,
                                     width: 2,
                                   ),
                                   image: DecorationImage(
@@ -523,6 +494,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                 ),
 
                 SizedBox(height: 12),
+
                 Container(
                   decoration: BoxDecoration(
                     color: PRIME_BLUE,
@@ -593,14 +565,14 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                     left: 8,
                   ),
                   decoration: BoxDecoration(
-                    border: Border.all(width: 2, color: Colors.orange),
                     borderRadius: BorderRadius.circular(12),
+                    color: PRIME_WHITE,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: EdgeInsets.only(right: 8, bottom: 8, left: 8),
                         decoration: BoxDecoration(
                           color: PRIME_BLUE,
                           borderRadius: BorderRadius.only(
@@ -610,7 +582,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                         ),
                         child: Text(
                           'Recent Payment',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: PRIME_WHITE),
                         ),
                       ),
                       SizedBox(height: 8),
@@ -625,15 +597,15 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                             Row(
                               children: [
                                 Container(
-                                  height: 20,
-                                  width: 20,
+                                  height: 16,
+                                  width: 16,
                                   decoration: BoxDecoration(
                                     color: Colors.green,
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
                                     Icons.check,
-                                    color: Colors.white,
+                                    color: PRIME_WHITE,
                                     size: 12,
                                   ),
                                 ),
@@ -672,14 +644,18 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                            right: 8,
+                            left: 8,
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: PRIME_WHITE,
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(12),
                                     bottomRight: Radius.circular(12),
@@ -691,7 +667,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                 icon: Icons.text_snippet,
                                 label: "Test Name",
                                 value: "NOTEPAD",
-                                iconColor: Colors.deepPurple,
+                                iconColor: PRIME_WHITE,
                               ),
 
                               // Test Name
@@ -700,14 +676,14 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                 icon: Icons.group,
                                 label: "Batch",
                                 value: "AMIT DCA 9 AM",
-                                iconColor: Colors.blueGrey,
+                                iconColor: PRIME_WHITE,
                               ),
                               const SizedBox(height: 12),
                               BuiltRow(
                                 icon: Icons.check_circle,
                                 label: "Status",
                                 value: "Submitted",
-                                iconColor: Colors.green,
+                                iconColor: PRIME_WHITE,
                               ),
                               // Batch
                               const SizedBox(height: 12),
@@ -715,7 +691,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                 icon: Icons.calendar_month,
                                 label: "Date & Time",
                                 value: "008/02/25 9:00 AM",
-                                iconColor: Colors.orange,
+                                iconColor: PRIME_WHITE,
                               ),
 
                               // Date & Time
