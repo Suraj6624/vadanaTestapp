@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Studymaterial extends StatefulWidget {
+class Studymaterial extends ConsumerStatefulWidget {
   const Studymaterial({super.key});
 
   @override
-  State<Studymaterial> createState() => _StudymaterialState();
+  ConsumerState<Studymaterial> createState() => _StudymaterialState();
 }
 
-class _StudymaterialState extends State<Studymaterial> {
+class _StudymaterialState extends ConsumerState<Studymaterial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Text('Studdymaterial'));

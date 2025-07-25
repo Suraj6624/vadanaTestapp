@@ -49,12 +49,11 @@ class _CourseState extends ConsumerState<Course> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(title: 'Course'),
+        backgroundColor: background_color,
         body: Padding(
           padding: EdgeInsets.all(12),
           child: Column(
             children: [
-              CustomSearchBar(),
-              SizedBox(height: 24),
               userSync.when(
                 loading: () {
                   return CircularProgressIndicator();
@@ -67,8 +66,9 @@ class _CourseState extends ConsumerState<Course> {
                     width: double.infinity,
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      border: Border.all(color: PRIME_ORANGE, width: 2),
+                      border: Border.all(color: PRIMAY_BLACK),
                       borderRadius: BorderRadius.circular(12),
+                      color: PRIME_WHITE,
                     ),
 
                     child: Column(
@@ -94,7 +94,8 @@ class _CourseState extends ConsumerState<Course> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: PRIME_ORANGE, width: 2),
+                  border: Border.all(color: PRIMAY_BLACK),
+                  color: PRIME_WHITE,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -110,10 +111,13 @@ class _CourseState extends ConsumerState<Course> {
 
                     SizedBox(height: 24),
                     Container(
+                      width: double.infinity,
+                      alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
                         vertical: 8,
                         horizontal: 12,
                       ),
+                      margin: EdgeInsets.only(right: 20, left: 20),
                       decoration: BoxDecoration(
                         color: PRIME_ORANGE,
                         borderRadius: BorderRadius.circular(12),

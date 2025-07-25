@@ -25,7 +25,8 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
     Widget? nextPage, // 👈 Optional destination page
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+
       child: InkWell(
         onTap:
             onTap ??
@@ -115,7 +116,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
       child: Scaffold(
         drawer: Drawer(
           width: MediaQuery.of(context).size.width * 0.8,
-          backgroundColor: PRIME_WHITE,
+          backgroundColor: background_color,
           child: SafeArea(
             child: Column(
               children: [
@@ -237,51 +238,75 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                     ),
                     child: ListView(
                       children: [
-                        SizedBox(height: 16),
-                        _buildDrawerItem(
-                          context,
-                          'Home',
-                          Icons.home,
-                          nextPage: StudentDashboard(),
+                        SizedBox(height: 8),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Home',
+                            Icons.home,
+                            nextPage: StudentDashboard(),
+                          ),
                         ),
-                        _buildDrawerItem(
-                          context,
-                          'Courses',
-                          Icons.menu_book,
-                          nextPage: Course(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Courses',
+                            Icons.menu_book,
+                            nextPage: Course(),
+                          ),
                         ),
-                        _buildDrawerItem(
-                          context,
-                          'Payment',
-                          Icons.payment,
-                          nextPage: Payment(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Payment',
+                            Icons.payment,
+                            nextPage: Payment(),
+                          ),
                         ),
-
-                        _buildDrawerItem(
-                          context,
-                          'Study Material',
-                          Icons.import_contacts,
-                          nextPage: StudentDashboard(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Study Material',
+                            Icons.import_contacts,
+                            nextPage: StudentDashboard(),
+                          ),
                         ),
-
-                        _buildDrawerItem(
-                          context,
-                          'Test',
-                          Icons.text_snippet,
-                          nextPage: Test(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Test',
+                            Icons.text_snippet,
+                            nextPage: Test(),
+                          ),
                         ),
-                        _buildDrawerItem(
-                          context,
-                          'Notice',
-                          Icons.notifications,
-                          nextPage: StudentDashboard(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Notice',
+                            Icons.notifications,
+                            nextPage: StudentDashboard(),
+                          ),
                         ),
-
-                        _buildDrawerItem(
-                          context,
-                          'Contact',
-                          Icons.phone,
-                          nextPage: StudentDashboard(),
+                        SizedBox(height: 4),
+                        Container(
+                          color: PRIME_WHITE,
+                          child: _buildDrawerItem(
+                            context,
+                            'Contact',
+                            Icons.phone,
+                            nextPage: StudentDashboard(),
+                          ),
                         ),
                       ],
                     ),
@@ -289,11 +314,12 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    top: 0,
+                    top: 8,
                     right: 16,
-                    bottom: 16,
+                    bottom: 8,
                     left: 16,
                   ),
+                  color: PRIME_WHITE,
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {},
@@ -357,7 +383,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
             ),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 239, 249, 255),
+        backgroundColor: background_color,
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsetsGeometry.all(16),

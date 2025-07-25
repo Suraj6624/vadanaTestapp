@@ -6,15 +6,16 @@ import 'package:testapp/screens/studyMaterial.dart';
 import 'package:testapp/screens/payment.dart';
 import 'package:testapp/screens/notice.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Result extends StatefulWidget {
+class Result extends ConsumerStatefulWidget {
   const Result({super.key});
 
   @override
-  State<Result> createState() => _ResultState();
+  ConsumerState<Result> createState() => _ResultState();
 }
 
-class _ResultState extends State<Result> {
+class _ResultState extends ConsumerState<Result> {
   void _navigateToPage(BuildContext context, int index) {
     switch (index) {
       case 0:

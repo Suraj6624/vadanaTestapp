@@ -3,14 +3,16 @@ import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
 
-class Payment extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class Payment extends ConsumerStatefulWidget {
   const Payment({super.key});
 
   @override
-  State<Payment> createState() => _PaymentState();
+  ConsumerState<Payment> createState() => _PaymentState();
 }
 
-class _PaymentState extends State<Payment> {
+class _PaymentState extends ConsumerState<Payment> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -42,7 +42,7 @@ class TestBuiltrow extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
-              color: PRIME_ORANGE,
+              // color: PRIME_ORANGE,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
