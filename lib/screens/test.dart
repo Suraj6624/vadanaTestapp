@@ -67,7 +67,7 @@ class _TestState extends ConsumerState<Test> {
                                     color: PRIME_BLACK,
                                   ),
                                 ),
-
+                                SizedBox(width: 8),
                                 InkWell(
                                   onTap: () {
                                     Navigator.of(context).push(
@@ -79,7 +79,7 @@ class _TestState extends ConsumerState<Test> {
                                   },
                                   child: Icon(
                                     Icons.arrow_forward_ios,
-                                    color: PRIME_BLACK,
+                                    color: PRIME_ORANGE,
                                   ),
                                 ),
                               ],

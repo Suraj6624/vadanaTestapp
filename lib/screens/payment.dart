@@ -20,6 +20,7 @@ class _PaymentState extends ConsumerState<Payment> {
       child: Scaffold(
         appBar: CustomAppBar(title: 'Payments'),
         bottomNavigationBar: MyBottomBar(currentIndex: 2),
+        backgroundColor: background_color,
         body: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -45,6 +46,7 @@ class _PaymentState extends ConsumerState<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
+                  color: PRIME_WHITE,
                   border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -80,6 +82,7 @@ class _PaymentState extends ConsumerState<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
+                  color: PRIME_WHITE,
                   border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),

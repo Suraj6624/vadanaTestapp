@@ -24,7 +24,7 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
     String title,
     IconData icon, {
     VoidCallback? onTap,
-    Widget? nextPage, // 👈 Optional destination page
+    Widget? nextPage,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
