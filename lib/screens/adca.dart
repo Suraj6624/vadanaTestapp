@@ -1,55 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/providers/course_list_provider.dart';
+
 import 'package:testapp/providers/get_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/screens/note.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
-import 'package:testapp/widgets/searchbar.dart';
-import 'package:testapp/widgets/course_builtrow.dart';
-import 'package:testapp/screens/studyMaterial.dart';
-import 'package:testapp/screens/student_dashboard.dart';
-import 'package:testapp/controllers/course_controller.dart';
-import 'package:testapp/screens/payment.dart';
-import 'package:testapp/screens/notice.dart';
 
-class Course extends ConsumerStatefulWidget {
-  const Course({super.key});
+import 'package:testapp/widgets/course_builtrow.dart';
+import 'package:testapp/widgets/my_bottom_bar.dart';
+
+class Adca extends ConsumerStatefulWidget {
+  const Adca({super.key});
 
   @override
-  ConsumerState<Course> createState() => _CourseState();
+  ConsumerState<Adca> createState() => _AdcaState();
 }
 
-class _CourseState extends ConsumerState<Course> {
-  void _navigateToPage(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => StudentDashboard()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => Studymaterial()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Payment()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Notice()));
-        break;
-    }
-  }
-
+class _AdcaState extends ConsumerState<Adca> {
   @override
   Widget build(BuildContext context) {
     final userSync = ref.watch(getUserInfoProvider);
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Course'),
+        appBar: CustomAppBar(title: 'ADCA'),
         backgroundColor: background_color,
+        bottomNavigationBar: MyBottomBar(currentIndex: 1),
         body: Padding(
           padding: EdgeInsets.all(12),
           child: Column(
@@ -122,39 +97,26 @@ class _CourseState extends ConsumerState<Course> {
                         color: PRIME_ORANGE,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(
-                        'View Notes',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: PRIME_WHITE,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => Scaffold(body: Notes()),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'View Notes',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: PRIME_WHITE,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: PRIMARY_COLOR),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) => _navigateToPage(context, index),
-
-            selectedItemColor: PRIME_WHITE,
-            unselectedItemColor: PRIME_WHITE,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.import_contacts),
-                label: '',
-              ),
-              BottomNavigationBarItem(icon: Icon(Icons.payment), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notification_add),
-                label: '',
               ),
             ],
           ),

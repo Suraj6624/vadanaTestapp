@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/repositoy/auth_repository.dart';
+import 'package:testapp/screens/vadanta_login_page.dart';
 import 'package:testapp/utils/storage_util.dart';
 
 enum AuthStatus { initial, loading, success, error }
@@ -44,6 +46,15 @@ class AuthController extends StateNotifier<AuthState> {
         errorMessage: e.toString(),
       );
     }
+  }
+
+  logout(BuildContext context) {
+    StorageUtil.clear();
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const StudentLogin()),
+    );
   }
 
   Future<void> fetchProfile(String token) async {

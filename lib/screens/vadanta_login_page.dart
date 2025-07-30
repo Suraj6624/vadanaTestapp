@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/controllers/auth_controller.dart';
+import 'package:testapp/providers/get_user_provider.dart';
 
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/screens/student_dashboard.dart';
@@ -192,6 +193,7 @@ class _StudentLoginState extends ConsumerState<StudentLogin> {
                                       );
                                       if (updatedAuth.status ==
                                           AuthStatus.success) {
+                                        await ref.refresh(getUserInfoProvider);
                                         Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(

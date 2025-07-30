@@ -4,6 +4,7 @@ import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testapp/widgets/my_bottom_bar.dart';
 
 class Payment extends ConsumerStatefulWidget {
   const Payment({super.key});
@@ -17,7 +18,8 @@ class _PaymentState extends ConsumerState<Payment> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Payment'),
+        appBar: CustomAppBar(title: 'Payments'),
+        bottomNavigationBar: MyBottomBar(currentIndex: 2),
         body: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -43,7 +45,7 @@ class _PaymentState extends ConsumerState<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: PRIME_ORANGE, width: 2),
+                  border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -78,7 +80,7 @@ class _PaymentState extends ConsumerState<Payment> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: PRIME_ORANGE, width: 2),
+                  border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(

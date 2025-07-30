@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:testapp/controllers/course_controller.dart';
+
 import 'package:testapp/providers/course_list_provider.dart';
 import 'package:testapp/providers/get_user_provider.dart';
+import 'package:testapp/screens/adca.dart';
+import 'package:testapp/screens/drawer.dart';
+import 'package:testapp/screens/note.dart';
+import 'package:testapp/screens/payment.dart';
+import 'package:testapp/utils/app_constants.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/builtrow.dart';
-import 'package:testapp/screens/course.dart';
-import 'package:testapp/screens/payment.dart';
-import 'package:testapp/screens/test.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:testapp/widgets/my_bottom_bar.dart';
 
 class StudentDashboard extends ConsumerStatefulWidget {
   const StudentDashboard({super.key});
@@ -17,48 +21,6 @@ class StudentDashboard extends ConsumerStatefulWidget {
 }
 
 class _StudentDashboardState extends ConsumerState<StudentDashboard> {
-  Widget _buildDrawerItem(
-    BuildContext context,
-    String title,
-    IconData icon, {
-    VoidCallback? onTap,
-    Widget? nextPage, // 👈 Optional destination page
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-
-      child: InkWell(
-        onTap:
-            onTap ??
-            () {
-              Navigator.pop(context);
-              if (nextPage != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => nextPage),
-                );
-              }
-            },
-        child: Row(
-          children: [
-            Row(
-              children: [
-                Icon(icon, color: PRIME_BLUE),
-                const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 16, color: PRIMAY_BLACK),
-                ),
-              ],
-            ),
-            const Spacer(),
-            const Icon(Icons.arrow_forward_ios, size: 16, color: PRIME_BLACK),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildPaymentRow(
     BuildContext context,
     IconData icon,
@@ -81,7 +43,15 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
 
           child: Column(
             children: [
-              Icon(icon, color: PRIME_BLUE),
+              SizedBox(height: 5),
+              Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: PRIME_BLUE,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Icon(icon, color: PRIME_WHITE),
+              ),
 
               Text(
                 label,
@@ -92,14 +62,16 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                 ),
               ),
 
-              Text(
-                amount,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: PRIME_BLUE,
-                ),
-              ),
+              amount == ""
+                  ? SizedBox(height: 10)
+                  : Text(
+                      amount,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: PRIME_BLUE,
+                      ),
+                    ),
             ],
           ),
         ),
@@ -109,246 +81,12 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final courses = ref.watch(getCourseListProvider);
     final userSync = ref.watch(getUserInfoProvider);
 
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(
-          width: MediaQuery.of(context).size.width * 0.8,
-          backgroundColor: background_color,
-          child: SafeArea(
-            child: Column(
-              children: [
-                userSync.when(
-                  loading: () {
-                    return CircularProgressIndicator();
-                  },
-                  error: (error, stackTrace) {
-                    return CircularProgressIndicator();
-                  },
-                  data: (data) {
-                    return Container(
-                      color: PRIME_BLUE,
-                      height: 200,
-
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: PRIME_WHITE,
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: PRIMARY_COLOR,
-                                  width: 10,
-                                ),
-                                top: BorderSide(
-                                  color: PRIMARY_COLOR,
-                                  width: 10,
-                                ),
-                                right: BorderSide(
-                                  color: PRIMARY_COLOR,
-                                  width: 10,
-                                ),
-                                left: BorderSide.none,
-                              ),
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(
-                                  140,
-                                ), // makes top-right corner rounded
-                                bottomRight: Radius.circular(
-                                  140,
-                                ), // makes bottom-right corner rounded
-                              ),
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              height: 100,
-
-                              decoration: BoxDecoration(
-                                color: PRIME_WHITE,
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(
-                                    100,
-                                  ), // makes top-right corner rounded
-                                  bottomRight: Radius.circular(
-                                    100,
-                                  ), // makes bottom-right corner rounded
-                                ),
-                              ),
-                              child: Container(
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: PRIME_ORANGE,
-                                    width: 3,
-                                  ),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      'https://m6.wamarket.cloud${data!.image}',
-                                    ),
-                                    // fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          Container(
-                            padding: EdgeInsets.only(left: 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Hello',
-                                  style: TextStyle(color: PRIME_WHITE),
-                                ),
-                                Text(
-                                  '${data!.name}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: PRIME_WHITE,
-                                  ),
-                                ),
-                                Text(
-                                  '${data.autoStuId}',
-                                  style: TextStyle(color: PRIME_WHITE),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                      ),
-                    ),
-                    child: ListView(
-                      children: [
-                        SizedBox(height: 8),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Home',
-                            Icons.home,
-                            nextPage: StudentDashboard(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Courses',
-                            Icons.menu_book,
-                            nextPage: Course(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Payment',
-                            Icons.payment,
-                            nextPage: Payment(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Study Material',
-                            Icons.import_contacts,
-                            nextPage: StudentDashboard(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Test',
-                            Icons.text_snippet,
-                            nextPage: Test(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Notice',
-                            Icons.notifications,
-                            nextPage: StudentDashboard(),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Container(
-                          color: PRIME_WHITE,
-                          child: _buildDrawerItem(
-                            context,
-                            'Contact',
-                            Icons.phone,
-                            nextPage: StudentDashboard(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    top: 8,
-                    right: 16,
-                    bottom: 8,
-                    left: 16,
-                  ),
-                  color: PRIME_WHITE,
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(Icons.logout, color: PRIMARY_COLOR),
-                        SizedBox(width: 8),
-                        Text(
-                          'Logout',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.redAccent,
-                          ),
-                        ),
-                        Spacer(),
-                        const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16,
-                          color: PRIME_BLACK,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
+        drawer: AppDrawer(),
+        bottomNavigationBar: MyBottomBar(currentIndex: 0),
         appBar: AppBar(
           backgroundColor: PRIME_WHITE,
           elevation: 2,
@@ -423,12 +161,13 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       children: [
                                         Icon(
                                           Icons.person,
-                                          color: PRIMARY_COLOR,
+                                          color: PRIME_WHITE,
                                           size: 18,
                                         ),
                                         SizedBox(width: 6),
@@ -447,12 +186,12 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                       children: [
                                         Icon(
                                           Icons.badge,
-                                          color: Colors.green,
+                                          color: PRIME_WHITE,
                                           size: 18,
                                         ),
                                         SizedBox(width: 6),
                                         Text(
-                                          "ID: ${data.autoStuId}",
+                                          "${data.autoStuId}",
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
@@ -505,7 +244,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                   ),
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      'https://m6.wamarket.cloud${data!.image}',
+                                      '${AppConstants.mainUrl}${data!.image}',
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -537,18 +276,46 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildPaymentRow(
-                              context,
-                              Icons.school,
-                              "Course Fee",
-                              "₹ 6500",
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => Scaffold(
+                                      body: Adca(),
+                                      bottomNavigationBar: MyBottomBar(
+                                        currentIndex: 1,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: _buildPaymentRow(
+                                context,
+                                Icons.school,
+                                "Courses",
+                                "",
+                              ),
                             ),
 
-                            _buildPaymentRow(
-                              context,
-                              Icons.payments,
-                              "Total Paid",
-                              "₹ 6500",
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => Scaffold(
+                                      body: Payment(),
+                                      bottomNavigationBar: MyBottomBar(
+                                        currentIndex: 2,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: _buildPaymentRow(
+                                context,
+                                MdiIcons.currencyRupee,
+                                "Payments",
+                                "",
+                              ),
                             ),
                           ],
                         ),
@@ -561,18 +328,32 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildPaymentRow(
-                              context,
-                              Icons.account_balance_wallet,
-                              "Due Amount",
-                              "₹ 0",
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => Scaffold(
+                                      body: Notes(),
+                                      bottomNavigationBar: MyBottomBar(
+                                        currentIndex: 3,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: _buildPaymentRow(
+                                context,
+                                MdiIcons.note,
+                                "Notes",
+                                "",
+                              ),
                             ),
 
                             _buildPaymentRow(
                               context,
-                              Icons.add_card,
-                              "Add Payment",
-                              "₹ 0",
+                              MdiIcons.certificate,
+                              "Certificates",
+                              "",
                             ),
                           ],
                         ),
@@ -585,7 +366,7 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.only(
-                    top: 4,
+                    top: 0,
                     right: 8,
                     bottom: 8,
                     left: 8,
@@ -598,26 +379,45 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(right: 8, bottom: 8, left: 8),
+                        padding: EdgeInsets.only(
+                          right: 12,
+                          bottom: 5,
+                          left: 12,
+                          top: 5,
+                        ),
                         decoration: BoxDecoration(
                           color: PRIME_BLUE,
                           borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16),
                           ),
                         ),
                         child: Text(
                           'Recent Payment',
-                          style: TextStyle(color: PRIME_WHITE),
+                          style: TextStyle(color: PRIME_WHITE, fontSize: 16),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 12),
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Course Fee ₹6500/- :',
+                              'Course Name :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text('ADCA with Tallyprime'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 8),
+
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Amount Paid :',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Row(
@@ -635,13 +435,15 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                                     size: 12,
                                   ),
                                 ),
-                                Text('Fully Paid'),
+                                SizedBox(width: 5),
+                                Text('₹4500'),
                               ],
                             ),
                           ],
                         ),
                       ),
                       SizedBox(height: 8),
+
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -654,6 +456,22 @@ class _StudentDashboardState extends ConsumerState<StudentDashboard> {
                           ],
                         ),
                       ),
+
+                      SizedBox(height: 8),
+
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Payment Mode :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text('Cash'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/screens/result.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
 import 'package:testapp/widgets/course_builtrow.dart';
-import 'package:testapp/widgets/test_result.dart';
-import 'package:testapp/screens/student_dashboard.dart';
-import 'package:testapp/screens/studyMaterial.dart';
-import 'package:testapp/screens/payment.dart';
-import 'package:testapp/screens/notice.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Test extends ConsumerStatefulWidget {
@@ -17,29 +14,6 @@ class Test extends ConsumerStatefulWidget {
 }
 
 class _TestState extends ConsumerState<Test> {
-  void _navigateToPage(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => StudentDashboard()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => Studymaterial()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Payment()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Notice()));
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,41 +36,60 @@ class _TestState extends ConsumerState<Test> {
                       label: 'Test Name :',
                       value: 'CHAPTER-15-GST',
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: 8),
                     CourseBuiltrow(label: 'Batch :', value: 'TPQ8-29/03/2025'),
-                    SizedBox(height: 4),
+                    SizedBox(height: 8),
                     CourseBuiltrow(
                       label: 'Date&Time  :',
                       value: '18/01/2081 10:54 AM',
                     ),
-                    SizedBox(height: 4),
-                    CourseBuiltrow(label: 'Status :', value: 'Submitted'),
-                    SizedBox(height: 4),
-                    TestBuiltrow(label: 'Action :', value: 'View Result'),
+                    SizedBox(height: 8),
+                    Container(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Status :",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: PRIME_BLACK,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Container(
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Submitted",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: PRIME_BLACK,
+                                  ),
+                                ),
+
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            Scaffold(body: Result()),
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: PRIME_BLACK,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: PRIMARY_COLOR),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) => _navigateToPage(context, index),
-
-            selectedItemColor: PRIME_WHITE,
-            unselectedItemColor: PRIME_WHITE,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.import_contacts),
-                label: '',
-              ),
-              BottomNavigationBarItem(icon: Icon(Icons.payment), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notification_add),
-                label: '',
               ),
             ],
           ),

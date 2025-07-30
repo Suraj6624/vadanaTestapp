@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/utils/constant.dart';
 import 'package:testapp/widgets/appbar.dart';
-import 'package:testapp/screens/student_dashboard.dart';
-import 'package:testapp/screens/studyMaterial.dart';
-import 'package:testapp/screens/payment.dart';
-import 'package:testapp/screens/notice.dart';
+
 import 'package:testapp/widgets/course_builtrow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,29 +13,6 @@ class Result extends ConsumerStatefulWidget {
 }
 
 class _ResultState extends ConsumerState<Result> {
-  void _navigateToPage(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => StudentDashboard()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => Studymaterial()),
-        );
-        break;
-      case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Payment()));
-        break;
-      case 3:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Notice()));
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,7 +26,7 @@ class _ResultState extends ConsumerState<Result> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: PRIME_ORANGE, width: 2),
+                  border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -86,35 +60,13 @@ class _ResultState extends ConsumerState<Result> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border.all(color: PRIME_ORANGE, width: 2),
+                  border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: CourseBuiltrow(
                   label: 'Batch Name :',
                   value: 'TP08 - 29/03/2025',
                 ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: PRIMARY_COLOR),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) => _navigateToPage(context, index),
-
-            selectedItemColor: PRIME_WHITE,
-            unselectedItemColor: PRIME_WHITE,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.import_contacts),
-                label: '',
-              ),
-              BottomNavigationBarItem(icon: Icon(Icons.payment), label: ''),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notification_add),
-                label: '',
               ),
             ],
           ),
